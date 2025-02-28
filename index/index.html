@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>MAMA <3</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="car">
+        <div class="car__top"></div>
+        <div class="car__body">
+        <div class="car__bulb"></div>
+        <div class="car__bulb car__bulb--back"></div>
+        <div class="car__center"></div>
+        </div>
+        <div class="car__wheels">
+        <div class="car__wheel car__wheel--1">
+        <div class="wheel__circle"></div>
+        <div class="wheel__rect wheel__rect--1"></div>
+        <div class="wheel__rect wheel__rect--2"></div>
+        <div class="wheel__rect wheel__rect--3"></div>
+        <div class="wheel__rect wheel__rect--4"></div>
+        <div class="wheel__rect wheel__rect--5"></div>
+        <div class="wheel__rect wheel__rect--6"></div>
+        </div>
+        <div class="car__wheel car__wheel--2">
+        <div class="wheel__circle"></div>
+        <div class="wheel__rect wheel__rect--1"></div>
+        <div class="wheel__rect wheel__rect--2"></div>
+        <div class="wheel__rect wheel__rect--3"></div>
+        <div class="wheel__rect wheel__rect--4"></div>
+        <div class="wheel__rect wheel__rect--5"></div>
+        <div class="wheel__rect wheel__rect--6"></div>
+        </div>
+        </div>
+        </div>
+        <div class="cloud" style="--delay:1s;--top:10vmin"></div>
+        <div class="cloud" style="--delay:3s;--top:20vmin"></div>
+        <div class="cloud" style="--delay:7s;--top:10vmin"></div>
+        <div class="girl">
+            <div class="girl__body">
+                <div class="girl__head">
+                    <div class="girl__eye girl__eye--left"></div>
+                    <div class="girl__eye girl__eye--right"></div>
+                    <div class="girl__nose"></div>
+                </div>
+                <div class="girl__whiskers">
+                    <div class="whisker whisker--left"></div>
+                    <div class="whisker whisker--middle-left"></div>
+                    <div class="whisker whisker--middle-right"></div>
+                    <div class="whisker whisker--right"></div>
+                </div>
+                <div class="girl__ears">
+    <div class="ear ear--left"></div>
+    <div class="ear ear--right"></div>
+</div>
+                <div class="girl__bow"></div>           
+                <div class="girl__dress"></div>
+                <div class="girl__arms">
+                    <div class="girl__hand girl__hand--left"></div>
+                    <div class="girl__hand girl__hand--right"></div>
+                </div>
+            </div>
+            <div class="girl__bouquet"></div>
+            <div class="girl__letter"></div>
+        </div>
+          
+    <audio id="carSound" src="./sounds/carhorn.mp3" preload="auto"></audio>
+    <audio id="girlSound" src="#" preload="auto"></audio>
+
+    <script>
+        // Wait for the page to load to make sure the audio is ready
+        window.addEventListener('load', function() {
+            const carSound = document.getElementById('carSound');
+            const girlSound = document.getElementById('girlSound');
+    
+            // Make sure the audio files are ready
+            carSound.load();
+            girlSound.load();
+    
+            // Play car sound when the page loads
+            carSound.play();  // Play car horn sound at the beginning
+    
+            // Add click event listener to the car
+            document.querySelector(".car").addEventListener("click", function () {
+                this.classList.toggle("paused");
+    
+                document.querySelectorAll(".car__wheel, .cloud").forEach(element => {
+                    element.style.animationPlayState = this.classList.contains("paused") ? "paused" : "running";
+                });
+    
+                // Play car sound
+                if (this.classList.contains("paused")) {
+                    carSound.pause();  
+                } 
+    
+                // Handle girl animation and sound
+                const girl = document.querySelector(".girl");
+                if (this.classList.contains("paused")) {
+                    girl.style.opacity = "1";
+                    girl.style.transform = "translate(50%, 10vmin)"; // Girl goes up
+                    girlSound.play();  // Play girl's sound when she exits the car
+                } else {
+                    girl.style.opacity = "0";
+                    girl.style.transform = "translate(-50%, 0)"; // Girl goes back to the car
+                    girlSound.pause();  // Stop girl sound
+                }
+            });
+        
+document.querySelector(".girl__bouquet").addEventListener("click", function() {
+    window.location.href = "../flower/flower.html"; // Redirect to another page containing the flower
+});
+
+document.querySelector(".girl__letter").addEventListener("click", function() {
+    window.location.href = "../lettre/card.html"; // Redirect to another page containing the letter
+});
+
+        });
+    </script>
+    
+    
+</body>
+</html>
